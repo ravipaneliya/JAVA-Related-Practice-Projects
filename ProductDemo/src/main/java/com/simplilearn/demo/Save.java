@@ -2,6 +2,9 @@ package com.simplilearn.demo;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,11 +33,20 @@ public class Save extends HttpServlet {
 
 			session.save(new Products(prodname, price, desc));
 			tx.commit();
+			
+			out.print("Product Inserted Successfully");
+			
+			List<Products> productList = session.createQuery("from Products").list();
+			
+			request.setAttribute("products", productList);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("product.jsp");
+		    rd.forward(request, response);
+		    
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		out.print("Product Inserted Successfully");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
