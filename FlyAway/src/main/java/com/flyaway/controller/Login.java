@@ -28,6 +28,7 @@ public class Login extends HttpServlet {
 			if(cust != null) {
 				request.getSession().setAttribute("userid", cust.getId());
 				request.getSession().setAttribute("user", cust.getName());
+				request.getSession().setAttribute("isadmin", cust.getIs_admin());
 				RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 			    rd.forward(request, response);
 			} else {

@@ -32,4 +32,17 @@ public class CustomerDao {
 		}*/
 		return 0;
 	}
+	
+	public int updatePassword(int customerId, String oldPass, String newPass) {
+		try {
+			PreparedStatement stat = conn.prepareStatement("update customers set password_string = ? where id = ? and password_string = ?");
+			stat.setString(1, newPass);
+			stat.setInt(2, customerId);
+			stat.setString(3, oldPass);
+			return stat.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }
