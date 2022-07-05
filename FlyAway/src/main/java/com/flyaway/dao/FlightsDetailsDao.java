@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
 import java.util.ArrayList;
 
 import com.flyaway.model.FlightDetails;
@@ -59,5 +60,38 @@ public class FlightsDetailsDao {
 		}
 		
 		return flightList;
+	}
+	
+	public boolean addFlight(FlightDetails fd) {
+		try {
+			PreparedStatement stat = conn.prepareStatement("INSERT INTO flight_details (`flight_number`, `airline`, `weekdays`, `src_airport_code`, `dest_airport_code`, `economy_fare`, `premium_fare`, `business_fare`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+			stat.setInt(1, fd.getFlight_number());
+			stat.setString(2, fd.getAirline());
+			stat.setString(3, fd.getWeekdays());
+			stat.setString(4, fd.getSrc_airport_code());
+			stat.setString(5, fd.getDest_airport_code());
+			
+			if(fd.getEconomy_fare() > 0)
+				stat.setDouble(6, fd.getEconomy_fare());
+			else
+				stat.setNull(6,java.sql.Types.NULL);
+			
+			if(fd.getPremium_fare() > 0)
+				stat.setDouble(7, fd.getPremium_fare());
+			else
+				stat.setNull(7,java.sql.Types.NULL);
+			
+			if(fd.getBusiness_fare() > 0)
+				stat.setDouble(8, fd.getBusiness_fare());
+			else
+				stat.setNull(8,java.sql.Types.NULL);
+			
+			if(stat.executeUpdate()>0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return false;
 	}
 }

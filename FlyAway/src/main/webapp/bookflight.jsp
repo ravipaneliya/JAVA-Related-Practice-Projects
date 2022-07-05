@@ -16,9 +16,11 @@
 	<%
 	String user;
 	int userid = 0;
+	int isadmin = 0;
 	if (session.getAttribute("user") != null && session.getAttribute("userid") != null) {
 		user = (String) session.getAttribute("user");
 		userid = (int) session.getAttribute("userid");
+		isadmin = (int) session.getAttribute("isadmin");
 	}
 	%>
 	<table style="background-color: grey" cellspacing="10" align="right"
@@ -41,6 +43,11 @@
 				<%
 				} else {
 				%>
+				<% if(isadmin == 1) {%>
+					<td><a href="showflights">
+						<button class="actiontxt">SHOW FLIGHTS</button>
+					</a></td>
+				<% }%>
 				<td><a href="showbookings">
 						<button class="actiontxt">SHOW BOOKINGS</button>
 				</a></td>

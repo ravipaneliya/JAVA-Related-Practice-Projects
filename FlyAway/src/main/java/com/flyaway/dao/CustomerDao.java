@@ -14,23 +14,23 @@ public class CustomerDao {
 		conn = DBConfig.getConnection();
 	}
 
-	public int saveCustomer(Customer cust) {
-/*		try {
-			PreparedStatement stat = conn
-					.prepareStatement("insert into customer" + "(firstname,lastname,email,password) values (?,?,?,?)");
+	public boolean saveCustomer(Customer cust) {
+		try {
+			PreparedStatement stat = conn.prepareStatement("insert into customers (name,is_admin,email,password_string,phoneno) values (?,?,?,?,?)");
 
-			stat.setString(1, cust.get());
-			stat.setString(2, cust.getLastName());
-			stat.setString(3, cust.getEmail());
-			stat.setString(4, cust.getPassword());
+			stat.setString(1, cust.getName());
+			stat.setInt(2, cust.getIs_admin());
+			stat.setString(3, cust.getemail());
+			stat.setString(4, cust.getPassword_string());
+			stat.setString(5, cust.getPhoneno());
 
-			return stat.executeUpdate();
+			if(stat.executeUpdate()>0) {
+				return true;
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return 0;
-		}*/
-		return 0;
+		}
+		return false;
 	}
 	
 	public int updatePassword(int customerId, String oldPass, String newPass) {

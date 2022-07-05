@@ -100,12 +100,14 @@
 	<%
 	}
 	%>
-	<br><br><br>
-<p align="center">
-		<a href="bookflight.jsp">
+	<br>
+	<br>
+	<br>
+	<p align="center">
+		<a href="addflight.jsp">
 			<button
 				style="background-color: transparent; color: lightskyblue; font-size: 30px;">CLICK
-				HERE TO BOOK FLIGHT</button>
+				HERE TO ADD NEW FLIGHT</button>
 		</a>
 	</p>
 </body>
