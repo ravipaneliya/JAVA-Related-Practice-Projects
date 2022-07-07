@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="hello" class="com.practice.SpringDemo.TestBean"></bean>
+    
+    <bean id="marks" class="com.practice.SpringDemo.Marks">
+    	<property name="phy" value="70"></property>
+    	<property name="chem" value="80"></property>
+    	<property name="maths" value="90"></property>
+    </bean>
+    <bean id="std" class="com.practice.SpringDemo.Student">
+    	<property name="id" value="1"></property>
+    	<property name="name" value="Ravi"></property>
+    	<property name="marks" ref="marks"></property><!-- Dependency Injected -->
+    </bean>
+
+</beans>
