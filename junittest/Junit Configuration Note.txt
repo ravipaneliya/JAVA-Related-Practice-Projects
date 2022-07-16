@@ -1,0 +1,48 @@
+------------------------------
+	jUnit Sample Project
+------------------------------
+
+way 1: you can create simple project and add junit jar files
+
+way 2: create maven project and include dependencies in that
+
+	include 2 dependencies
+
+	1. junit-jupiter-api
+	2. junit-jupiter-engine
+
+	also remove the old junit 3 dependecy
+	--> when you remove the default code available in src/test/java will give
+	    error, delete that file
+
+	right click on src/test/java and search in other for junit test case
+
+	when you try to give junit 5 while creating test case, application may 	show you warning like it will works only with higher version like >=8
+	
+	so first of all include maven compiler plugin in pom.xml
+
+	add this after dependencies tag
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.10.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+--------------------------------------------------------------------------------
+
+right click on your project and maven update.
+
+now again try to create junit test case
+
+and implement different annotation
+
+--------------------------------------------------------------------------------
