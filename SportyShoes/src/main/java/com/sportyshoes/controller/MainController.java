@@ -5,20 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RestController;
 import com.sportyshoes.model.User;
 import com.sportyshoes.service.UserService;
 
-@Controller
+@RestController
 public class MainController {
 	
 	@Autowired
-	UserService userService;
+	UserService service;
 
 	@GetMapping("/")
 	public String showWelcome(){
@@ -27,12 +25,12 @@ public class MainController {
 	
 	@GetMapping("/admin")
 	public List<User> getAllUsers(){
-		return userService.getAllUsers();
+		return service.getAllUsers();
 	}
 	
 	@PostMapping("/admin")
 	public ResponseEntity<Object> addUser(@RequestBody User user){
-		User addedUser = userService.addUser(user);
+		User addedUser = service.addUser(user);
 		
 		if(addedUser!=null)
 			return new ResponseEntity<Object>(addedUser,HttpStatus.CREATED);
