@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,7 +64,6 @@ public class MainController {
 
 	@PostMapping("/admin")
 	public ResponseEntity<Object> addUser(@RequestBody User user) {
-		System.out.println("\n\n-------------------- POST CALL RECEIVED...");
 		User addedUser = userService.addUser(user);
 
 		if (addedUser != null)
@@ -72,6 +72,15 @@ public class MainController {
 			return new ResponseEntity<Object>("Error while adding user", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@DeleteMapping("/admin/{id}")
+	public ResponseEntity<Object> deleteUser(@PathVariable int id) {
+		if(userService.deleteUser(id))
+			return new ResponseEntity<Object>("User Is Successfully Deleted", HttpStatus.FOUND);
+		else
+			return new ResponseEntity<Object>("User is not available with given id : " + id, HttpStatus.NOT_FOUND);
+	}
+	//Product Mappings Starts From Here
+	
 	@GetMapping("/admin/product")
 	public List<Product> getAllProducts() {
 		return prodService.getAllProducts();
@@ -88,12 +97,17 @@ public class MainController {
 
 	@PostMapping("/admin/product")
 	public ResponseEntity<Object> addProduct(@RequestBody Product prod) {
-		Category cat = prod.getCategory();
-		if (cat != null && cat.getId() == 0) {
-			cat = new Category(cat.getName(), cat.getType());
-			cat = categoryService.addCategory(cat);
+		Category newCategory = prod.getCategory();
+		if(newCategory != null) {
+			Category category = categoryService.getCategoryById(newCategory.getId());
+			if (category == null || category.getId() == 0) {
+				newCategory = new Category(newCategory.getName(), newCategory.getType());
+				newCategory = categoryService.addCategory(newCategory);
+			} else {
+				newCategory = category;
+			}
 		}
-		prod = new Product(prod.getName(), prod.getDescription(), prod.getPrice(), cat);
+		prod = new Product(prod.getName(), prod.getDescription(), prod.getPrice(), newCategory);
 		
 		Product newProd = prodService.addProduct(prod);
 		if (newProd != null)
@@ -109,5 +123,13 @@ public class MainController {
 			return new ResponseEntity<Object>(updatedProd, HttpStatus.FOUND);
 		else
 			return new ResponseEntity<Object>("Product is not available with given id", HttpStatus.NOT_FOUND);
+	}
+	
+	@DeleteMapping("/admin/product/{id}")
+	public ResponseEntity<Object> deleteProduct(@PathVariable int id) {
+		if(prodService.deleteProduct(id))
+			return new ResponseEntity<Object>("Product Is Successfully Deleted", HttpStatus.FOUND);
+		else
+			return new ResponseEntity<Object>("Product is not available with given id : " + id, HttpStatus.NOT_FOUND);
 	}
 }

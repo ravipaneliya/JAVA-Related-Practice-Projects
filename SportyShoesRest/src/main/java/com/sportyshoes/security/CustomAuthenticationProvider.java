@@ -18,8 +18,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	List<User> userList = new ArrayList<>();
 	public CustomAuthenticationProvider() {
-		userList.add(new User(1, "A1", "a1", "p1", true, 1000000000L));
-		userList.add(new User(2, "A2", "a2", "p2", true, 2000000000L));
+		userList.add(new User(1, "admin", "admin@test.co", "pass", true, 1000000000L));
 	}
 
 	@Override

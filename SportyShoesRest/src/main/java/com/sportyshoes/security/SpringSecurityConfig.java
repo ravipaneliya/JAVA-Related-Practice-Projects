@@ -13,6 +13,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	// Protecting the urls with a role-based access.
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.cors().and().csrf().disable();
 		http.httpBasic().and().authorizeRequests()
 				.antMatchers("/").permitAll()
 				.antMatchers("/user").hasRole("USER") // User
