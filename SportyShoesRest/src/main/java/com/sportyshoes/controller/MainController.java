@@ -1,6 +1,8 @@
 package com.sportyshoes.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sportyshoes.model.Category;
 import com.sportyshoes.model.Product;
+import com.sportyshoes.model.Purchase;
 import com.sportyshoes.model.User;
 import com.sportyshoes.service.CategoryService;
 import com.sportyshoes.service.ProductService;
+import com.sportyshoes.service.PurchaseService;
 import com.sportyshoes.service.UserService;
 
 @RestController
@@ -31,6 +35,9 @@ public class MainController {
 
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	PurchaseService purService;
 
 	@GetMapping("/")
 	public String showWelcome() {
@@ -79,7 +86,8 @@ public class MainController {
 		else
 			return new ResponseEntity<Object>("User is not available with given id : " + id, HttpStatus.NOT_FOUND);
 	}
-	//Product Mappings Starts From Here
+	
+	//Product Mappings Starts From Here...
 	
 	@GetMapping("/admin/product")
 	public List<Product> getAllProducts() {
@@ -131,5 +139,33 @@ public class MainController {
 			return new ResponseEntity<Object>("Product Is Successfully Deleted", HttpStatus.FOUND);
 		else
 			return new ResponseEntity<Object>("Product is not available with given id : " + id, HttpStatus.NOT_FOUND);
+	}
+	
+	//Purchase Mappings Starts From Here...
+	
+	@PostMapping("/admin/purchase")
+	public ResponseEntity<Object> addPurchase(@RequestBody Purchase pur){
+		Set<Product> prods = new HashSet<Product>();
+		for(Product prod : pur.getProducts()){
+			prods.add(prodService.getProductById(prod.getId()));
+		}
+		
+		User user = userService.getUserById(pur.getUser().getId());
+		
+		pur = new Purchase(prods, user, pur.getOrderDate());
+		Purchase newPur = purService.addPurchase(pur);
+		if (newPur != null)
+			return new ResponseEntity<Object>(newPur, HttpStatus.FOUND);
+		else
+			return new ResponseEntity<Object>("Error while adding Purchase", HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("/admin/purchase/{id}")
+	public ResponseEntity<Object> getPurchase(@PathVariable int id) {
+		Purchase pur = purService.getPurchaseById(id);
+		if (pur != null)
+			return new ResponseEntity<Object>(pur, HttpStatus.FOUND);
+		else
+			return new ResponseEntity<Object>("Purchase is not available with given order id", HttpStatus.NOT_FOUND);
 	}
 }
