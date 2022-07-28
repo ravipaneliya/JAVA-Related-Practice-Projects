@@ -1,10 +1,12 @@
 package com.sportyshoes.controller;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sportyshoes.model.Category;
@@ -167,5 +170,20 @@ public class MainController {
 			return new ResponseEntity<Object>(pur, HttpStatus.FOUND);
 		else
 			return new ResponseEntity<Object>("Purchase is not available with given order id", HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("/admin/purchase")
+	public List<Purchase> getAllPurchases() {
+		return purService.getAllPurchase();
+	}
+	
+	@GetMapping("/admin/purchase/date")
+	public List<Purchase> getAllPurchasesByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date orderDate) {
+		return purService.getPurchasesByDate(orderDate);
+	}
+	
+	@GetMapping("/admin/purchase/category")
+	public List<Purchase> getAllPurchasesByCategory(@RequestParam String cname) {
+		return purService.getPurchasesByCategory(cname);
 	}
 }
