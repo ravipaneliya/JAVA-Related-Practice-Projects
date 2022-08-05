@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME - Ming's Dinner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        .navbar {
+            overflow: visible;
+            width: 67%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body data-spy="scroll">
+    <div class="container-fluid">
+        <nav class="navbar h1-responsive navbar-expand-lg navbar-light bg-light fixed-top text-center">
+            <a href="#home" class="navbar-brand"><img src="logo.gif" class="rounded-circle" height="50 px" width="50 px"></a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">HOME</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="mydropdown" data-toggle="dropdown">BEST SELLER</a>
+                    <div class="dropdown-menu" aria-labelledby="mydropdown">
+                        <a href="#salads" class="dropdown-item">SALADS</a>
+                        <a href="#wraps" class="dropdown-item">WRAPS</a>
+                        <a href="#burger" class="dropdown-item">BURGER</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#aboutus" class="nav-link">ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contactus" class="nav-link">CONTACT US</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- PAGE DETAILS -->
+        <div id="home" style="padding-top:80px;" class="text-center">
+            <img src="home.avif" class="rounded img-fluid" height="550 px" width="1200 px">
+            <h3 class="h1-responsive">JUST TASTE ONCE, YOU WILL LOVE FOREVER.</h3>
+        </div>
+        <div id="salads" style="padding-top:80px;" class="text-center">
+            <h3>SALADS</h3>
+            <img src="salad.jpg" class="rounded img-fluid" height="500 px" width="900 px">
+        </div>
+        <div id="wraps" style="padding-top:80px;" class="text-center">
+            <h3>WRAPS</h3>
+            <img src="wraps.png" class="rounded img-fluid" height="500 px" width="900 px">
+        </div>
+        <div id="burger" style="padding-top:80px;" class="text-center">
+            <h3>BURGER</h3>
+            <img src="burger.jpg" class="rounded img-fluid" height="500 px" width="900 px">
+        </div>
+        <div class="container" id="aboutus" style="padding-top:80px;">
+            <h2 class="h1-responsive font-weight-bold text-center">ABOUT MING'S DINNER</h2>
+            
+            <p class="text-center">We ought to be about something beyond moving chicken. We ought to be a piece of our client’s lives and the networks in which we serve.</p>
+            <p class="text-center">Our originator, settled on the choice to close on Sundays in 1946 when he opened his first eatery in Hapeville, Georgia. Having worked seven days in eateries open 24 hours, Truett saw the significance of shutting on Sundays with the goal that he and his representatives could set aside one day to rest and love whether they pick - a training we maintain today. </p>
+            <p class="text-center">Our Backstage Tour offers a genuine narrating background roused by the entrancing history, culture, and estimations of the organization. From our neighborly individuals and delightful food to the irresistible “Eat Mor Chikin” Cows, you can investigate the remarkable ‘Organization Name’ story with our guided strolling visit. </p>
+            <p class="text-center">Consistently, in excess of 11 million visitors visit ‘Organization Name’  eateries around the globe. What’s more, they do as such in light of the fact that our eateries are known for serving astounding, incredible tasting, and reasonable food.</p>
+            <p class="text-center">Our Kitchen is the second-biggest fast-food burger chain on the planet. The first home of customary burgers, our promise to premium fixings, signature formulas, and family-accommodating feasting encounters is the thing that has characterized our image for in excess of 50 fruitful years.</p>
+            
+            <img src="about.jpg" class="rounded img-fluid" width="1200 px">
+        </div>
+        <div class="container" id="contactus" style="padding-top:80px;">
+                <section class="mb-4">
+                    <h2 class="h1-responsive font-weight-bold text-center my-4">CONTACT US</h2>
+                    <p class="text-center w-responsive mx-auto mb-5">Please do not hesitate to contact us directly. Our team will come back to you within
+                        a matter of hours to help you.</p>
+                    <div class="row">
+                        <div class="col-md-12 mb-md-0 mb-5">
+                            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <input type="text" id="name" name="name" class="form-control" required>
+                                            <label for="name">Your name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <input type="text" id="email" name="email" class="form-control" required>
+                                            <label for="email">Your email</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="md-form mb-0">
+                                            <input type="text" id="subject" name="subject" class="form-control" required>
+                                            <label for="subject">Subject</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="md-form">
+                                            <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                                            <label for="message">Your message</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a class="btn btn-primary">SUBMIT</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+                <br>
+                <address class="text-center">
+                    <strong class="font-weight-bold">MING'S DINNER INC.</strong><br><br>
+                        12 Ka Four Ring Road,<br>
+                        Four Two Ka One<br>
+                        MyCity - 000000<br>
+                        Phone No : <b>(+91) 98765-43210</b>
+                </address>
+                <br>
+        </div>
+    </div>
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2022 Copyright:
+          <a class="text-reset font-weight-bold" href="#home">www.mingsdinner.co</a>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
