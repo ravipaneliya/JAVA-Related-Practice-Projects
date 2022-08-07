@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Planner</title>
+</head>
+<body>
+    1 : Add Expense<br>
+    2 : View Expense<br>
+    3 : Calculate Expenses<br>
+    4 : Remove Expense<br>
+    5 : Exit<br>
+    <script>
+        class Expense{
+            constructor(name,expense){
+                this.name = name
+                this.expense = expense
+            }
+
+            print(){
+                console.log("Expense (" + this.name + ") = " + this.expense)
+            }
+        }
+        let exp = [];
+        while(true){
+            let act = prompt("1 : Add Expense \n2 : View Expense \n3 : Calculate Expenses \n4 : Remove Expense \n5 : Exit")
+            console.log("--------: Action " + act + ":------------")
+            if(parseInt(act) === 1){
+                addExpense()
+            }
+            if(parseInt(act) === 2){
+                showALLExpenses()
+            }
+            if(parseInt(act) === 3){
+                sumOfExpenses()
+            }
+            if(parseInt(act) === 4){
+                //remove code pending..
+                removeExpense()
+                showALLExpenses()
+            }
+            if(parseInt(act) === 5){
+                break
+            }
+        }
+
+        function addExpense(){
+            var name = prompt("Expense Name")
+            var expense = prompt("Expense Value")
+            var newexp = new Expense(name,expense)
+            exp.push(newexp)
+        }
+
+        function showALLExpenses(){
+            for(let i=0;i<exp.length;i++){
+                if(exp[i] != null){
+                    exp[i].print()
+                }
+            }
+        }
+
+        function sumOfExpenses(){
+            var sum = 0;
+            for(let i=0;i<exp.length;i++){
+                if(exp[i] != null){
+                    sum = sum + parseInt(exp[i].expense)
+                }
+            }
+            console.log("Sum : " + sum)
+        }
+
+        function removeExpense(){
+            let name = prompt("Expense Name To Remove")
+            for(let i=0;i<exp.length;i++){
+                if(exp[i].name == name){
+                    exp[i] = null
+                    break
+                }
+            }
+        }
+    </script>
+</body>
+</html>
