@@ -13,9 +13,13 @@ public class UserService {
 	@Autowired
 	UserRepository repo;
 
-//	public User authenticateUser(String username, String password) {
-//		return repo.getUserByUsernameAndPaswordAndRole(username, password);
-//	}
+	public User authenticateUser(String username, String password) {
+		User user = repo.getUserByUsernameAndPasword(username, password);
+		if (user == null) {
+            user = new User();
+        }
+		return user;
+	}
 
 	public User addUser(User user) {
 		user = repo.save(user);

@@ -13,11 +13,11 @@ import java.util.Optional;
 
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-	@Autowired
-	UserService service;
+	UserService userService;
 
 	List<User> userList = new ArrayList<>();
-	public CustomAuthenticationProvider() {
+	public CustomAuthenticationProvider(UserService us) {
+		userService = us;
 		userList.add(new User(1, "admin", "admin@test.co", "pass", true, 1000000000L));
 	}
 
@@ -26,15 +26,27 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String name = authentication.getName();
 		String password = authentication.getCredentials().toString();
 		System.out.println("Login with User (" + name + ") Pass : (" + password + ")");
-		Optional<User> authenticatedUser = userList.stream()
-				.filter(user -> user.getName().equals(name) && user.getPassword().equals(password)).findFirst();
-
-		if (!authenticatedUser.isPresent()) {
+		
+//		Optional<User> authenticatedUser = userList.stream()
+//				.filter(user -> user.getName().equals(name) && user.getPassword().equals(password)).findFirst();
+//
+//		if (!authenticatedUser.isPresent()) {
+//			throw new BadCredentialsException("Authentication Failed..");
+//		}
+//
+//		List<GrantedAuthority> authorities = new ArrayList<>();
+//		authorities.add(new SimpleGrantedAuthority(authenticatedUser.get().getIsadminAsString()));
+//		Authentication auth = new UsernamePasswordAuthenticationToken(name, password, authorities);
+//		return auth;
+		
+		User authenticatedUser = userService.authenticateUser(name, password);
+		System.out.println("---------: USER OBJECT : " + authenticatedUser.toString());
+		
+		if (authenticatedUser.getId() <= 0) {
 			throw new BadCredentialsException("Authentication Failed..");
 		}
-
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(authenticatedUser.get().getIsadminAsString()));
+		authorities.add(new SimpleGrantedAuthority(authenticatedUser.getIsadminAsString()));
 		Authentication auth = new UsernamePasswordAuthenticationToken(name, password, authorities);
 		return auth;
 	}

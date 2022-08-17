@@ -106,4 +106,12 @@ public class User {
 	public void setLast_update(Date last_update) {
 		this.last_update = last_update;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", isadmin="
+				+ isadmin + ", phoneno=" + phoneno + ", last_update=" + last_update + "]";
+	}
+	
+	
 }
