@@ -1,0 +1,23 @@
+<div class="text-right text-secondary">{{user}}</div>
+<h2 class="text-info text-center">Kitchen Items Order Details</h2>
+<table class="table table-bordered table-striped text-center">
+    <thead>
+        <tr class="text-center">
+            <th>ORDER ID</th>
+            <th>ORDER DETAILS</th>
+            <th>ORDER TOTAL</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let o of orders" class="text-center">
+            <td >{{o.id}}</td>
+            <td>
+                <li *ngFor="let c of o.cart" class="text-left">
+                    <b>{{c.productname}}</b> : <b>{{c.price | number:'.2-4' | currency:'INR':true:'2.2-2'}}</b>
+                </li>
+            </td>
+            <td>{{o.total}}</td>
+            <td><button class="btn btn-warning"><b>MAKE PAYMENT</b></button></td>
+        </tr>
+    </tbody>
+</table>

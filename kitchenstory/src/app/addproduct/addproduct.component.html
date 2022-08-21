@@ -1,0 +1,45 @@
+<div class="text-right text-secondary">{{user}}</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <h2 class="text-danger text-center">ADD NEW PRODUCT</h2>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" formControlName="name" class="form-control" [(ngModel)]="prod.name"
+                    [ngClass]="{'is-invalid':submitted && form['name'].errors}">
+
+                    <div *ngIf="submitted && form['name'].errors" class="invalid-feedback">
+                        <div *ngIf="form['name'].errors['required']">
+                            Name cannot be Empty
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Product Detail</label>
+                    <input type="text" formControlName="detail" class="form-control"
+                    [ngClass]="{'is-invalid':submitted && form['detail'].errors}" [(ngModel)]="prod.detail">
+                    <div *ngIf="submitted && form['detail'].errors" class="invalid-feedback">
+                        <div *ngIf="form['detail'].errors['required']">
+                            Details cannot be Empty
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" formControlName="price" class="form-control"
+                    [ngClass]="{'is-invalid':submitted && form['price'].errors}" [(ngModel)]="prod.price">
+                    <div *ngIf="submitted && form['price'].errors" class="invalid-feedback">
+                        <div *ngIf="form['price'].errors['required']">
+                            Price cannot be Empty
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <button class="btn btn-primary">SAVE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

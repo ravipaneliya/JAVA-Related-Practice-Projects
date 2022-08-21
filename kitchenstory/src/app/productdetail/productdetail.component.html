@@ -1,0 +1,14 @@
+<div class="text-right text-secondary">{{user}}</div>
+<button class="btn btn-warning" (click)="goback()">Go Back</button>
+<div *ngIf="isProductFound">
+    <h4 class="text-center text-info">Product Details For Given ID</h4>
+    <ul class="list-group">
+        <li class="list-group-item">ID : <b>{{prod.id}}</b></li>
+        <li class="list-group-item">NAME : <b>{{prod.name}}</b></li>
+        <li class="list-group-item">DETAIL : <b>{{prod.detail}}</b></li>
+        <li class="list-group-item">PRICE : <b>{{prod.price | number:'.2-4'}}</b></li>
+    </ul>
+</div>
+<div *ngIf="!isProductFound">
+    <h4 class="text-center text-danger">Product Not Found With Given ID</h4>
+</div>

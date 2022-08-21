@@ -1,0 +1,36 @@
+<div class="text-right text-secondary">{{user}}</div>
+<h2 class="text-info text-center">Most Preferred Kitchen Products</h2>
+<table class="table table-bordered table-striped text-center">
+    <thead>
+        <tr class="text-center">
+            <th>ID</th>
+            <th>PRODUCT</th>
+            <th>DESCRIPTION</th>
+            <th>PRICE</th>
+            <!-- <div *ngIf="isAdminLoggedIn"> -->
+                <th [hidden]="!isAdminLoggedIn">ACTION</th>
+            <!-- </div> -->
+            <th>PURCHASE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of products" class="text-center">
+            <!-- <td><input type="text" name="nm" value="{{p.name}}" disabled="true"></td> -->
+            <td >{{p.id}}</td>
+            <td>{{p.name}}</td>
+            <td>{{p.detail}}</td>
+            <td>{{p.price | number:'.2-4'}}</td>
+            <!-- <div *ngIf="isAdminLoggedIn"> -->
+            <td [hidden]="!isAdminLoggedIn">
+                <button class="btn btn-success" routerLink="/product/{{p.id}}">Show</button>&nbsp;
+                <button class="btn btn-primary" (click)="updateProduct(p.id, p.name, p.detail, p.price)">Edit</button>&nbsp;
+                <button class="btn btn-danger" (click)="deleteProduct(p.id)">Delete</button>
+            </td>
+            <td><button class="btn btn-dark" (click)="addItemtoCart(p.name, p.price)">Add To Cart</button></td>
+            <!-- </div> -->
+        </tr>
+    </tbody>
+</table>
+<a [hidden]="!isAdminLoggedIn" class="text-center" routerLink="/addproduct">
+    <button class="btn btn-info">ADD NEW ITEM</button>&nbsp;
+</a>
